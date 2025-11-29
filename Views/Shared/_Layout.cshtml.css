@@ -46,3 +46,9 @@ button.accept-policy {
   white-space: nowrap;
   line-height: 60px;
 }
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: #121212; /* Premium Koyu Gri */
+    color: #ffffff;
+}

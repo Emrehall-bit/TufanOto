@@ -1,8 +1,69 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Ana Sayfa";
+    string heroImage = "/Images/Tamirhane.jpg";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<header class="container-fluid p-0">
+    <div class="row g-0">
+        <div class="col-lg-6 bg-white d-flex align-items-center order-2 order-lg-1">
+            <div class="p-5">
+                <h1 class="display-4 fw-bold mb-3 text-black">
+                    Arabanın Sıkıntısını <br>
+                    <span style="color: #fd7e14;">Dert Etme.</span>
+                </h1>
+                <p class="lead text-secondary mb-4">
+                    Sanayide dükkan dükkan gezmeye son. Fotoğrafı çekip gönderin, ustasından fiyatı cebinize gelsin.
+                </p>
+                <a href="#teklif-al" class="btn btn-warning text-white fw-bold px-4 py-3" style="background-color: #fd7e14; border: none;">
+                    <i class="fas fa-camera me-2"></i> Fotoğraf Yükle & Fiyat Al
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-6 order-1 order-lg-2 position-relative" style="min-height: 500px;">
+            <img src="@heroImage" alt="Tamirhane" class="w-100 h-100" style="object-fit: cover; position: absolute; top: 0; left: 0;">
+        </div>
+
+    </div>
+</header>
+
+
+<section class="py-5 bg-light">
+    <div class="container">
+
+        <div class="text-center mb-5 mt-4">
+            <h2 class="fw-bold text-dark">Neden Bizi Seçmelisiniz?</h2>
+            <p class="text-muted">Sakarya'nın en tecrübeli ustaları ile çalışıyoruz.</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="bg-white p-4 rounded shadow-sm h-100 text-center border">
+                    <div class="mb-3 text-warning"><i class="fas fa-wrench fa-3x" style="color: #fd7e14;"></i></div>
+                    <h4 class="text-dark">Garantili İşçilik</h4>
+                    <p class="text-muted">Yapılan her işlem ustalarımızın garantisi altındadır.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="bg-white p-4 rounded shadow-sm h-100 text-center border">
+                    <div class="mb-3 text-warning"><i class="fas fa-bolt fa-3x" style="color: #fd7e14;"></i></div>
+                    <h4 class="text-dark">Hızlı Çözüm</h4>
+                    <p class="text-muted">Aracınız serviste aylarca yatmaz, söz verilen saatte teslim edilir.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="bg-white p-4 rounded shadow-sm h-100 text-center border">
+                    <div class="mb-3 text-warning"><i class="fas fa-lira-sign fa-3x" style="color: #fd7e14;"></i></div>
+                    <h4 class="text-dark">Sürpriz Fiyat Yok</h4>
+                    <p class="text-muted">Baştan ne fiyat verildiyse öderken o çıkar.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<a href="https://wa.me/905300000000" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
