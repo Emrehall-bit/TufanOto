@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Teklif Al";
+}
+
+
+
+<section class="py-5 bg-light">
+    <div class="container">
+
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert alert-success text-center mb-4 shadow">
+                <i class="fas fa-check-circle fa-2x"></i> <br>
+                <span class="fw-bold">@TempData["Message"]</span>
+            </div>
+        }
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="bg-white p-5 rounded shadow-lg border">
+
+                    <form asp-controller="Home" asp-action="TeklifAl" method="post" enctype="multipart/form-data">
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Telefon Numaranız <span class="text-danger">*</span></label>
+                            <input type="text" name="PhoneNumber" class="form-control form-control-lg" placeholder="05XX..." required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Araç Marka / Model</label>
+                            <input type="text" name="CarModel" class="form-control form-control-lg" placeholder="Örn: 2016 Fiat Egea" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Sorun Nedir? <span class="text-danger">*</span></label>
+                            <textarea name="Description" class="form-control form-control-lg" rows="4" placeholder="Örn: Direksiyonum bozuldu..." required></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Fotoğraf Ekle</label>
+                            <input type="file" name="file" class="form-control form-control-lg" accept="image/*" />
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-warning btn-lg text-white fw-bold py-3" style="background-color: #fd7e14; border: none;">
+                                <i class="fas fa-paper-plane me-2"></i> TEKLİFİ GÖNDER
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
