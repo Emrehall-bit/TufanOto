@@ -27,50 +27,55 @@ namespace TufanOto.Controllers
         }
 
         // --- ÝÞTE SÝHRÝN OLDUÐU YER: FORM BURAYA GELECEK ---
+        // --- GÜNCELLENMÝÞ TEKLÝF AL METODU ---
         [HttpPost]
-        [ValidateAntiForgeryToken] // Güvenlik kilidi
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> TeklifAl(CustomerRequest model, IFormFile? file)
         {
-            if (ModelState.IsValid) // Veriler kurallara uygun mu? (Tel boþ deðil vs.)
+            try
             {
-                // 1. Resim Yükleme Ýþlemi
-                if (file != null && file.Length > 0)
+                if (ModelState.IsValid)
                 {
-                    // Dosya uzantýsýný al (.jpg)
-                    var extension = Path.GetExtension(file.FileName);
-                    // Rastgele isim ver (resim-543543.jpg) ki çakýþmasýn
-                    var newImageName = Guid.NewGuid() + extension;
-
-                    // Klasör yoksa oluþtur
-                    var uploadDir = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads");
-                    if (!Directory.Exists(uploadDir)) Directory.CreateDirectory(uploadDir);
-
-                    // Resmi kaydet
-                    var location = Path.Combine(uploadDir, newImageName);
-                    using (var stream = new FileStream(location, FileMode.Create))
+                    // 1. Resim Yükleme Ýþlemi
+                    if (file != null && file.Length > 0)
                     {
-                        await file.CopyToAsync(stream);
+                        var extension = Path.GetExtension(file.FileName);
+                        var newImageName = Guid.NewGuid() + extension;
+                        var uploadDir = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads");
+
+                        if (!Directory.Exists(uploadDir)) Directory.CreateDirectory(uploadDir);
+
+                        var location = Path.Combine(uploadDir, newImageName);
+                        using (var stream = new FileStream(location, FileMode.Create))
+                        {
+                            await file.CopyToAsync(stream);
+                        }
+
+                        model.ImagePath = "/uploads/" + newImageName;
                     }
 
-                    // Veritabanýna resmin yolunu yaz
-                    model.ImagePath = "/uploads/" + newImageName;
+                    // 2. Veritabanýna Kaydetme
+                    _context.CustomerRequests.Add(model);
+                    await _context.SaveChangesAsync();
+
+                    // BAÞARILI MESAJI
+                    TempData["Message"] = "Talebini aldýk! Ustamýz en kýsa sürede dönüþ yapacak.";
+
+                    // Ýstersen Ana Sayfaya ("Index"), Ýstersen Teklif Sayfasýna ("Teklif") yönlendir.
+                    // Kullanýcý formun olduðu yerde kalsýn mesajý görsün diyorsan "Teklif" daha iyidir.
+                    return RedirectToAction("Teklif");
                 }
-
-                // 2. Veritabanýna Kaydetme
-                _context.CustomerRequests.Add(model);
-                await _context.SaveChangesAsync(); // SQL'e "Insert" komutunu yollar
-
-                // Baþarýlý mesajý (TempData sayfalar arasý taþýnýr)
-                TempData["Message"] = "Talebini aldýk! Ustamýz en kýsa sürede dönüþ yapacak.";
-
-                // Sayfayý yenile (Ana sayfaya git)
-                return RedirectToAction("Teklif");
+            }
+            catch (Exception ex)
+            {
+                // HATA OLURSA BURAYA DÜÞECEK
+                // Hatayý kullanýcýya gösterelim ki nedenini anlayalým (Normalde kullanýcýya ex.Message gösterilmez ama geliþtirme aþamasýndayýz)
+                TempData["Error"] = "Bir hata oluþtu: " + ex.Message;
             }
 
-            // Bir hata varsa formu geri gönder (Hatalarý görsün)
+            // Hata varsa veya form eksikse sayfayý yenileme, olduðu gibi göster
             return View("Teklif", model);
         }
-
         public IActionResult Privacy()
         {
             return View();

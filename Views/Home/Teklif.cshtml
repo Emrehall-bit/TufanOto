@@ -14,7 +14,13 @@
                 <span class="fw-bold">@TempData["Message"]</span>
             </div>
         }
-
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger text-center mb-4 shadow">
+                <i class="fas fa-exclamation-circle fa-2x"></i> <br>
+                <span class="fw-bold">@TempData["Error"]</span>
+            </div>
+        }
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="bg-white p-5 rounded shadow-lg border">
