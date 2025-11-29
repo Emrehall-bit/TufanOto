@@ -25,7 +25,9 @@ namespace TufanOto.Controllers
         {
             return View();
         }
-
+        
+        
+       
         // --- ÝÞTE SÝHRÝN OLDUÐU YER: FORM BURAYA GELECEK ---
         // --- GÜNCELLENMÝÞ TEKLÝF AL METODU ---
         [HttpPost]
@@ -75,6 +77,11 @@ namespace TufanOto.Controllers
 
             // Hata varsa veya form eksikse sayfayý yenileme, olduðu gibi göster
             return View("Teklif", model);
+        }
+        [HttpGet]
+        public IActionResult Iletisim()
+        {
+            return View();
         }
         public IActionResult Privacy()
         {
