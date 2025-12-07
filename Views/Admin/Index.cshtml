@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<TufanOto.Models.CustomerRequest>
+@{
+    Layout = "_AdminLayout";
+}
 
 @{
     ViewData["Title"] = "Usta Paneli";
@@ -21,6 +24,7 @@
                             <th>Müşteri Bilgisi</th>
                             <th>Sorun</th>
                             <th>Durum</th>
+                            <th style="width: 80px;">İşlem</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,8 +51,8 @@
                                     <small class="text-muted">@item.CarModel</small>
                                 </td>
 
-                                <td>
-                                    <p class="mb-0 text-wrap" style="max-width: 300px;">@item.Description</p>
+                                <td style="max-width: 300px;" class="text-wrap">
+                                    @item.Description
                                 </td>
 
                                 <td>
@@ -58,22 +62,30 @@
                                     }
                                     else
                                     {
-                                    <td>
-                                        @{
-                                            // Numarayı temizle (boşlukları sil)
-                                            string tel = item.PhoneNumber.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "");
-
-                                            // Başında '0' varsa kaldır (532... kalsın)
-                                            if (tel.StartsWith("0")) tel = tel.Substring(1);
-                                        }
-
-                                        <a href="https://wa.me/90@(tel)?text=Merhaba, Tufan Oto'dan yazıyorum. Gönderdiğiniz fotoğrafı inceledim."
-                                           target="_blank"
-                                           class="btn btn-success btn-sm text-white fw-bold">
-                                            <i class="fab fa-whatsapp"></i> Cevap Yaz
-                                        </a>
-                                    </td>
+                                        <span class="badge bg-warning text-dark">Bekliyor</span>
                                     }
+                                </td>
+
+                                <td class="text-end">
+
+                                    @* TELEFONU TEMİZLE *@
+                                    @{
+                                        string tel = item.PhoneNumber.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "");
+                                        if (tel.StartsWith("0")) tel = tel[1..];
+                                    }
+
+                                    <a href="https://wa.me/90@(tel)?text=Merhaba, Tufan Oto'dan yazıyorum. Gönderdiğiniz talebi inceledim."
+                                       target="_blank"
+                                       class="btn btn-success btn-sm text-white">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </a>
+
+                                    <a asp-action="Delete" asp-route-id="@item.Id"
+                                       class="btn btn-danger btn-sm"
+                                       onclick="return confirm('Bu talebi silmek istediğinize emin misiniz?')">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+
                                 </td>
                             </tr>
                         }

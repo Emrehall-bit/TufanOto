@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TufanOto.Data;   // Veritabanı
-using TufanOto.Models; // Tablo
+using Microsoft.AspNetCore.Authorization;
+using TufanOto.Data;
+using TufanOto.Models;
 
 namespace TufanOto.Controllers
 {
+    [Authorize(Roles = "Admin")] // SADECE ADMIN GİREBİLİR
     public class AdminController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -13,14 +15,15 @@ namespace TufanOto.Controllers
             _context = context;
         }
 
-        // Admin Ana Sayfası: Gelen Talepleri Listele
+        // === ADMIN PANEL ANA SAYFASI ===
         public IActionResult Index()
         {
-            // Veritabanından talepleri çek, tarihe göre tersten sırala (En yeni en üstte)
             var talepler = _context.CustomerRequests
                                    .OrderByDescending(x => x.CreatedAt)
                                    .ToList();
 
+            // Admin Layout kullan
+            ViewData["Layout"] = "_AdminLayout";
             return View(talepler);
         }
     }

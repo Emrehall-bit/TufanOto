@@ -4,53 +4,83 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - TufanOto</title>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/TufanOto.styles.css" asp-append-version="true" />
-
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">  @*Modern tasarım için yazı tipi*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    
 </head>
+
 <body>
+
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: oldlace; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    <img src="~/Images/logo.png" alt="TufanOto Logo" style="height: 50px; width: auto;" />
+                    <img src="~/Images/logo.png" alt="TufanOto Logo" style="height: 60px; width: auto;" />
                 </a>
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1 justify-content-end">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark fw-bold" asp-area="" asp-controller="Home" asp-action="Index">Ana Sayfa</a>
-                        </li>
-                        <li class="nav-item">
+                    <ul class="navbar-nav flex-grow-1 justify-content-end align-items-center">
+                        <li class="nav-item"><a class="nav-link text-dark fw-bold" asp-controller="Home" asp-action="Index">Ana Sayfa</a></li>
 
-
-                            <a class="nav-link text-dark fw-bold" asp-area="" asp-controller="Home" asp-action="Iletisim">İletişim</a>
+                        <li class="nav-item dropdown hover-dropdown">
+                            <a class="nav-link dropdown-toggle fw-bold text-dark" asp-controller="Products" asp-action="Index">Ürünler</a>
+                            <ul class="dropdown-menu border-0 shadow-lg p-3 animate__animated animate__fadeInUp">
+                                <li><a class="dropdown-item fw-bold" asp-controller="Products" asp-action="Index">Tüm Ürünler</a></li>
+                                <li><hr class="dropdown-divider my-2"></li>
+                                <li><a class="dropdown-item" href="#">Motor Yağları</a></li>
+                                <li><a class="dropdown-item" href="#">Direksiyon Kılıfları</a></li>
+                                <li><a class="dropdown-item" href="#">Diğer oto aksesuarlar</a></li>
+                            </ul>
                         </li>
+
+                        <li class="nav-item"><a class="nav-link text-dark fw-bold" asp-controller="Home" asp-action="Iletisim">İletişim</a></li>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item ms-lg-3"><a class="btn btn-outline-danger btn-sm fw-bold" asp-controller="Admin" asp-action="Index">Panel</a></li>
+                            <li class="nav-item ms-2"><a class="nav-link text-secondary" asp-controller="Account" asp-action="Logout"><i class="fas fa-sign-out-alt"></i></a></li>
+                        }
                     </ul>
-                   
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-   
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <footer style="background-color: oldlace; color: black;">
+        <div class="container text-center">
+            <span class="small" style="color: black;">&copy; 2025 - TufanOto Sakarya - Tüm Hakları Saklıdır.</span>
+            <div class="mt-2">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <span class="badge bg-warning text-dark me-2">Hoşgeldin Usta</span>
+                    <a asp-controller="Admin" asp-action="Index" class="text-white text-decoration-none small me-3">Panele Git</a>
+                }
+                else
+                {
+                    <a asp-controller="Account" asp-action="Login" class="text-secondary" style="opacity: 0.3; text-decoration: none;"><i class="fas fa-lock fa-xs"></i></a>
+                }
+            </div>
+        </div>
+    </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
