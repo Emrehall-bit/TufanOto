@@ -1,111 +1,84 @@
-/* === 1. TEMEL AYARLAR === */
-html {
-    font-size: 14px;
+/* GENEL AYARLAR (Light Mode) */
+body {
+    background-color: #f8f9fa; /* Hafif kýrýk beyaz (Gözü almaz) */
+    color: #212529; /* Koyu gri yazý (Siyah kadar sert deðil ama çok net) */
+    font-family: 'Outfit', sans-serif;
 }
 
-@media (min-width: 768px) {
-    html {
-        font-size: 16px;
-    }
-}
-
-html, body {
-    height: 100%; /* Sayfanýn tam boy olmasýný garanti eder */
-    font-family: 'Outfit', sans-serif; /* Modern Font */
-    background-color: #f8f9fa; /* Kýrýk beyaz zemin */
-    color: #212529; /* Koyu gri yazý */
-    margin: 0;
-    padding: 0;
-}
-
-
-
-/* === 2. TÝPOGRAFÝ (YAZILAR) === */
+/* OKUNABÝLÝRLÝK KRALLIÐI */
 h1, h2, h3, h4, h5, h6 {
-    color: #000;
+    color: #000000 !important; /* Baþlýklar simsiyah */
     font-weight: 700;
-    letter-spacing: -0.5px;
 }
 
-
-/* Menüdeki linklerin genel geçiþ ayarý (Yumuþak olmasý için) */
-.navbar-nav .nav-link {
-    transition: color 0.3s ease-in-out;
+p {
+    color: #495057; /* Paragraflar koyu gri */
+    font-size: 1.1rem; /* Yazýlarý bir týk büyüttük (Yaþlý dostu) */
 }
 
-    /* Mouse üzerine gelince (Hover) */
-    .navbar-nav .nav-link:hover {
-        color: #fd7e14 !important; /* Turuncu yap ve Bootstrap'i ez (!important) */
-        transform: translateY(-2px); /* Çok hafif yukarý zýplasýn (Ýsteðe baðlý) */
+/* NAVBAR (Üst Menü - Aydýnlýk) */
+.navbar {
+    background-color: #ffffff !important; /* Menü beyaz */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Hafif gölge */
+}
+
+.navbar-brand, .nav-link {
+    color: #333333 !important; /* Linkler koyu */
+    font-weight: 600;
+}
+
+    .nav-link:hover {
+        color: #d63384 !important; /* Üstüne gelince renk deðiþsin */
     }
 
-/* Açýlýr menüdeki (Dropdown) ana baþlýk için de aynýsý */
-.dropdown-toggle:hover {
-    color: #fd7e14 !important;
+/* KART TASARIMI (Beyaz ve Gölgeli) */
+.service-card {
+    background-color: #ffffff;
+    border: 1px solid #e9ecef; /* Çok silik çerçeve */
+    border-radius: 12px;
+    padding: 2.5rem 1.5rem;
+    transition: all 0.3s ease;
+    height: 100%;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05); /* Yumuþak gölge */
 }
 
-
-/* === 3. BUTONLAR VE FORMLAR === */
-/* Týklayýnca çýkan o mavi çerçeveyi (focus) bizim turuncu rengimize çevirir */
-.btn:focus, .btn:active:focus, .form-control:focus, .form-check-input:focus {
-    box-shadow: 0 0 0 0.1rem rgba(255, 255, 255, 0.5), 0 0 0 0.25rem rgba(253, 126, 20, 0.25);
-    border-color: #fd7e14;
-}
-
-/* Özel Turuncu Buton */
-.btn-warning {
-    color: #fff !important;
-    background-color: #fd7e14;
-    border-color: #fd7e14;
-}
-
-    .btn-warning:hover {
-        background-color: #e8590c;
-        border-color: #e8590c;
+    .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1); /* Havaya kalkma efekti */
+        border-color: #ffc107; /* Hover olunca sarý çerçeve */
     }
 
-/* === 4. MENÜ ANÝMASYONU (HOVER DROPDOWN) === */
-@media (min-width: 992px) {
-    .hover-dropdown:hover .dropdown-menu {
-        display: block;
-        margin-top: 0;
-        animation: fadeInUp 0.3s ease-out;
-    }
+.icon-box {
+    width: 80px;
+    height: 80px;
+    background-color: #f1f3f5; /* Ýkon arkasý gri daire */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem auto;
+    color: #fd7e14; /* Turuncu Ýkon (Sanayi Rengi) */
+    font-size: 2rem;
 }
 
-.dropdown-menu {
-    border-radius: 12px !important;
-    min-width: 220px;
+/* BUTONLAR (Yüksek Kontrast) */
+.btn-primary-custom {
+    background-color: #fd7e14; /* Canlý Turuncu (Harekete geçirir) */
+    color: #ffffff;
     border: none;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    font-weight: bold;
+    padding: 15px 40px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 15px rgba(253, 126, 20, 0.4);
 }
 
-/* Menü Linkleri */
-.dropdown-item {
-    padding: 10px 20px;
-    transition: all 0.2s;
-}
-
-    .dropdown-item:hover {
-        background-color: #fff3cd; /* Açýk sarý hover */
-        color: #fd7e14;
-        padding-left: 25px; /* Hafif saða kayma efekti */
+    .btn-primary-custom:hover {
+        background-color: #e8590c;
+        color: #ffffff;
     }
 
-/* Animasyon Keyframe */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translate3d(0, 15px, 0);
-    }
-
-    to {
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
-    }
-}
-
-/* === 5. WHATSAPP KAYAN BUTON === */
+/* WHATSAPP */
 .whatsapp-float {
     position: fixed;
     width: 60px;
@@ -119,41 +92,13 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1000; /* Her þeyin üstünde dursun */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    transition: all 0.3s;
+    z-index: 100;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-    .whatsapp-float:hover {
-        background-color: #128C7E;
-        transform: scale(1.1); /* Üstüne gelince hafif büyüsün */
-    }
-
-<style >
-/* Sayfa yapýsýnýn ekraný tam kaplamasýný saðlar */
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-/* Sayfayý dikey bir kutu gibi dizer */
-body {
-    display: flex;
-    flex-direction: column;
-}
-
-/* Ýçerik alanýný (Main) geniþletir ve Footer'ý aþaðý iter */
-main {
-    flex: 1 0 auto;
-}
-
-/* Footer'ýn boyutunu sabitler, büzüþmesini engeller */
+/* Footer Sabitleme */
 footer {
-    flex-shrink: 0;
-    width: 100%; 
-    padding: 20px 0;
-    margin-top: auto; /* Kendini en alta iter */
+    background-color: #343a40 !important; /* Footer koyu olsun, siteyi kapatsýn */
+    color: #ffffff;
+    margin-top: auto;
 }
-
-</style >

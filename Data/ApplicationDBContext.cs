@@ -12,6 +12,5 @@ namespace TufanOto.Data
 
         // CustomerRequest modelini veritabanında tabloya dönüştür
         public DbSet<CustomerRequest> CustomerRequests { get; set; }
-        public DbSet<Product> Products { get; set; }
     }
 }
